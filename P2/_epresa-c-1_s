@@ -7,34 +7,22 @@ echo "Setting up eth0"
 ip addr add 42.42.42.1/24 dev eth0
 ip link set eth0 up
 
-sleep 2
-
-echo "Setting up the vxlan"
+echo "Setting up the vxlan - static"
 ip link add vxlan10 type vxlan id 10 remote 42.42.42.2 dstport 4789 dev eth0
 ip link set vxlan10 up
-
-sleep 2
 
 echo "Up eth1"
 ip link set eth1 up
 
-sleep 2
-
 echo "Creating the bridge"
 ip link add br0 type bridge
-
-sleep 2
 
 echo "Up bridge"
 ip link set br0 up
 
-sleep 2
-
 echo "Adding interfaces to the bridge"
 ip link set eth1 master br0
 ip link set vxlan10 master br0
-
-sleep 2
 
 echo "Adding address to the bridge"
 ip addr add 30.1.1.3/24 dev br0
