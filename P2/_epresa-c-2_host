@@ -1,0 +1,15 @@
+#! /bin/sh
+
+echo "Setting up eth1"
+ip addr add 30.1.1.2/24 dev eth1
+
+sleep 2
+echo "Up eth1"
+ip link set eth1 up
+
+sleep 2
+echo "Adding default via"
+ip route add default via 30.1.1.4
+
+echo "Configuration completed successfully"
+exit 0
